@@ -6,7 +6,8 @@ Follow the blog to understand and use this sample.
 
 This sample consists of the code needed for the installation of the library package.
 
-DB_URL=http://172.17.0.1:5984
+DB_URL=http://172.17.0.1:5984 
+
 DB_NAME=library-database
 
 wsk package update library \
