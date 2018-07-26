@@ -1,10 +1,11 @@
-##Creating the database
+## Creating the database
 
 This sample is written against a mysql database.
 * Login to your mysql database
 * Create a database named "pizzadb"
 * Create a table named pizza
 
+```
 CREATE TABLE `pizza` (
   `id` varchar(100) NOT NULL DEFAULT '',
   `pizzaName` varchar(200) DEFAULT NULL,
@@ -12,14 +13,17 @@ CREATE TABLE `pizza` (
   `pizzaPrice` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
+```
 
 * Enter the following records into the pizza table
 
+```
 insert into pizza values(105,"Chicken Pizza", "Chicken","$12.95");
 insert into pizza values(107,"Cheese Pizza", "Veg","$11.95")
 insert into pizza values(107,"Tomato Pizza", "Veg","$13.95");
+```
 
-##Running the service
+## Running the service
 
 * Navigate to the folder Pizza-Service after checking out the code.
 * Build the code by running "mvn clean install"
