@@ -1,0 +1,5 @@
+org/wso2/pizza/service/PizzaService.class
+org/wso2/pizza/service/dto/ConnectionManager.class
+org/wso2/pizza/service/dto/PizzaDTO.class
+org/wso2/pizza/service/Application.class
+org/wso2/pizza/service/Pizza.class

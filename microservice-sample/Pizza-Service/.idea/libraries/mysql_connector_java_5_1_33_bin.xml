@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="mysql-connector-java-5.1.33-bin">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../setup/wso2am-2.2.0/repository/components/lib/mysql-connector-java-5.1.33-bin.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
