@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="AgentInfoService" targetNamespace="http://tempuri.org/">
+   <wsp:Policy wsu:Id="AgentInfoServiceOverWSHttp_policy">
+      <wsp:ExactlyOne>
+         <wsp:All>
+            <wsaw:UsingAddressing />
+         </wsp:All>
+      </wsp:ExactlyOne>
+   </wsp:Policy>
+   <wsp:Policy wsu:Id="AgentInfoServiceOverTCP_policy">
+      <wsp:ExactlyOne>
+         <wsp:All>
+            <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+            <wsaw:UsingAddressing />
+         </wsp:All>
+      </wsp:ExactlyOne>
+   </wsp:Policy>
+   <wsdl:types>
+      <xsd:schema targetNamespace="http://tempuri.org/Imports">
+         <xsd:import schemaLocation="http://qa-webnbsvc102.pminsco.com/AgentInfoService/AgentInfoService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+         <xsd:import schemaLocation="http://qa-webnbsvc102.pminsco.com/AgentInfoService/AgentInfoService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+         <xsd:import schemaLocation="http://qa-webnbsvc102.pminsco.com/AgentInfoService/AgentInfoService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+         <xsd:import schemaLocation="http://qa-webnbsvc102.pminsco.com/AgentInfoService/AgentInfoService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/PMIC.EnterpriseWebServices.AgentInfo" />
+      </xsd:schema>
+   </wsdl:types>
+   <wsdl:message name="IAgentInfoService_GetAgentLicensedStates_InputMessage">
+      <wsdl:part name="parameters" element="tns:GetAgentLicensedStates" />
+   </wsdl:message>
+   <wsdl:message name="IAgentInfoService_GetAgentLicensedStates_OutputMessage">
+      <wsdl:part name="parameters" element="tns:GetAgentLicensedStatesResponse" />
+   </wsdl:message>
+   <wsdl:message name="IAgentInfoService_GetAgentUnderwriter_InputMessage">
+      <wsdl:part name="parameters" element="tns:GetAgentUnderwriter" />
+   </wsdl:message>
+   <wsdl:message name="IAgentInfoService_GetAgentUnderwriter_OutputMessage">
+      <wsdl:part name="parameters" element="tns:GetAgentUnderwriterResponse" />
+   </wsdl:message>
+   <wsdl:message name="IAgentInfoService_GetAgentHierarchy_InputMessage">
+      <wsdl:part name="parameters" element="tns:GetAgentHierarchy" />
+   </wsdl:message>
+   <wsdl:message name="IAgentInfoService_GetAgentHierarchy_OutputMessage">
+      <wsdl:part name="parameters" element="tns:GetAgentHierarchyResponse" />
+   </wsdl:message>
+   <wsdl:message name="IAgentInfoService_GetAgentHierarchyForLicensedState_InputMessage">
+      <wsdl:part name="parameters" element="tns:GetAgentHierarchyForLicensedState" />
+   </wsdl:message>
+   <wsdl:message name="IAgentInfoService_GetAgentHierarchyForLicensedState_OutputMessage">
+      <wsdl:part name="parameters" element="tns:GetAgentHierarchyForLicensedStateResponse" />
+   </wsdl:message>
+   <wsdl:message name="IAgentInfoService_GetAllLinesOfBusiness_InputMessage">
+      <wsdl:part name="parameters" element="tns:GetAllLinesOfBusiness" />
+   </wsdl:message>
+   <wsdl:message name="IAgentInfoService_GetAllLinesOfBusiness_OutputMessage">
+      <wsdl:part name="parameters" element="tns:GetAllLinesOfBusinessResponse" />
+   </wsdl:message>
+   <wsdl:message name="IAgentInfoService_GetAgentDetail_InputMessage">
+      <wsdl:part name="parameters" element="tns:GetAgentDetail" />
+   </wsdl:message>
+   <wsdl:message name="IAgentInfoService_GetAgentDetail_OutputMessage">
+      <wsdl:part name="parameters" element="tns:GetAgentDetailResponse" />
+   </wsdl:message>
+   <wsdl:message name="IAgentInfoService_GetAgentDetailForList_InputMessage">
+      <wsdl:part name="parameters" element="tns:GetAgentDetailForList" />
+   </wsdl:message>
+   <wsdl:message name="IAgentInfoService_GetAgentDetailForList_OutputMessage">
+      <wsdl:part name="parameters" element="tns:GetAgentDetailForListResponse" />
+   </wsdl:message>
+   <wsdl:message name="IAgentInfoService_GetAgencyList_InputMessage">
+      <wsdl:part name="parameters" element="tns:GetAgencyList" />
+   </wsdl:message>
+   <wsdl:message name="IAgentInfoService_GetAgencyList_OutputMessage">
+      <wsdl:part name="parameters" element="tns:GetAgencyListResponse" />
+   </wsdl:message>
+   <wsdl:portType name="IAgentInfoService">
+      <wsdl:operation name="GetAgentLicensedStates">
+         <wsdl:input wsaw:Action="http://tempuri.org/IAgentInfoService/GetAgentLicensedStates" message="tns:IAgentInfoService_GetAgentLicensedStates_InputMessage" />
+         <wsdl:output wsaw:Action="http://tempuri.org/IAgentInfoService/GetAgentLicensedStatesResponse" message="tns:IAgentInfoService_GetAgentLicensedStates_OutputMessage" />
+      </wsdl:operation>
+      <wsdl:operation name="GetAgentUnderwriter">
+         <wsdl:input wsaw:Action="http://tempuri.org/IAgentInfoService/GetAgentUnderwriter" message="tns:IAgentInfoService_GetAgentUnderwriter_InputMessage" />
+         <wsdl:output wsaw:Action="http://tempuri.org/IAgentInfoService/GetAgentUnderwriterResponse" message="tns:IAgentInfoService_GetAgentUnderwriter_OutputMessage" />
+      </wsdl:operation>
+      <wsdl:operation name="GetAgentHierarchy">
+         <wsdl:input wsaw:Action="http://tempuri.org/IAgentInfoService/GetAgentHierarchy" message="tns:IAgentInfoService_GetAgentHierarchy_InputMessage" />
+         <wsdl:output wsaw:Action="http://tempuri.org/IAgentInfoService/GetAgentHierarchyResponse" message="tns:IAgentInfoService_GetAgentHierarchy_OutputMessage" />
+      </wsdl:operation>
+      <wsdl:operation name="GetAgentHierarchyForLicensedState">
+         <wsdl:input wsaw:Action="http://tempuri.org/IAgentInfoService/GetAgentHierarchyForLicensedState" message="tns:IAgentInfoService_GetAgentHierarchyForLicensedState_InputMessage" />
+         <wsdl:output wsaw:Action="http://tempuri.org/IAgentInfoService/GetAgentHierarchyForLicensedStateResponse" message="tns:IAgentInfoService_GetAgentHierarchyForLicensedState_OutputMessage" />
+      </wsdl:operation>
+      <wsdl:operation name="GetAllLinesOfBusiness">
+         <wsdl:input wsaw:Action="http://tempuri.org/IAgentInfoService/GetAllLinesOfBusiness" message="tns:IAgentInfoService_GetAllLinesOfBusiness_InputMessage" />
+         <wsdl:output wsaw:Action="http://tempuri.org/IAgentInfoService/GetAllLinesOfBusinessResponse" message="tns:IAgentInfoService_GetAllLinesOfBusiness_OutputMessage" />
+      </wsdl:operation>
+      <wsdl:operation name="GetAgentDetail">
+         <wsdl:input wsaw:Action="http://tempuri.org/IAgentInfoService/GetAgentDetail" message="tns:IAgentInfoService_GetAgentDetail_InputMessage" />
+         <wsdl:output wsaw:Action="http://tempuri.org/IAgentInfoService/GetAgentDetailResponse" message="tns:IAgentInfoService_GetAgentDetail_OutputMessage" />
+      </wsdl:operation>
+      <wsdl:operation name="GetAgentDetailForList">
+         <wsdl:input wsaw:Action="http://tempuri.org/IAgentInfoService/GetAgentDetailForList" message="tns:IAgentInfoService_GetAgentDetailForList_InputMessage" />
+         <wsdl:output wsaw:Action="http://tempuri.org/IAgentInfoService/GetAgentDetailForListResponse" message="tns:IAgentInfoService_GetAgentDetailForList_OutputMessage" />
+      </wsdl:operation>
+      <wsdl:operation name="GetAgencyList">
+         <wsdl:input wsaw:Action="http://tempuri.org/IAgentInfoService/GetAgencyList" message="tns:IAgentInfoService_GetAgencyList_InputMessage" />
+         <wsdl:output wsaw:Action="http://tempuri.org/IAgentInfoService/GetAgencyListResponse" message="tns:IAgentInfoService_GetAgencyList_OutputMessage" />
+      </wsdl:operation>
+   </wsdl:portType>
+   <wsdl:binding name="AgentInfoServiceOverWSHttp" type="tns:IAgentInfoService">
+      <wsp:PolicyReference URI="#AgentInfoServiceOverWSHttp_policy" />
+      <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+      <wsdl:operation name="GetAgentLicensedStates">
+         <soap12:operation soapAction="http://tempuri.org/IAgentInfoService/GetAgentLicensedStates" style="document" />
+         <wsdl:input>
+            <soap12:body use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="GetAgentUnderwriter">
+         <soap12:operation soapAction="http://tempuri.org/IAgentInfoService/GetAgentUnderwriter" style="document" />
+         <wsdl:input>
+            <soap12:body use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="GetAgentHierarchy">
+         <soap12:operation soapAction="http://tempuri.org/IAgentInfoService/GetAgentHierarchy" style="document" />
+         <wsdl:input>
+            <soap12:body use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="GetAgentHierarchyForLicensedState">
+         <soap12:operation soapAction="http://tempuri.org/IAgentInfoService/GetAgentHierarchyForLicensedState" style="document" />
+         <wsdl:input>
+            <soap12:body use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="GetAllLinesOfBusiness">
+         <soap12:operation soapAction="http://tempuri.org/IAgentInfoService/GetAllLinesOfBusiness" style="document" />
+         <wsdl:input>
+            <soap12:body use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="GetAgentDetail">
+         <soap12:operation soapAction="http://tempuri.org/IAgentInfoService/GetAgentDetail" style="document" />
+         <wsdl:input>
+            <soap12:body use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="GetAgentDetailForList">
+         <soap12:operation soapAction="http://tempuri.org/IAgentInfoService/GetAgentDetailForList" style="document" />
+         <wsdl:input>
+            <soap12:body use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="GetAgencyList">
+         <soap12:operation soapAction="http://tempuri.org/IAgentInfoService/GetAgencyList" style="document" />
+         <wsdl:input>
+            <soap12:body use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:binding name="AgentInfoServiceOverTCP" type="tns:IAgentInfoService">
+      <wsp:PolicyReference URI="#AgentInfoServiceOverTCP_policy" />
+      <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+      <wsdl:operation name="GetAgentLicensedStates">
+         <soap12:operation soapAction="http://tempuri.org/IAgentInfoService/GetAgentLicensedStates" style="document" />
+         <wsdl:input>
+            <soap12:body use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="GetAgentUnderwriter">
+         <soap12:operation soapAction="http://tempuri.org/IAgentInfoService/GetAgentUnderwriter" style="document" />
+         <wsdl:input>
+            <soap12:body use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="GetAgentHierarchy">
+         <soap12:operation soapAction="http://tempuri.org/IAgentInfoService/GetAgentHierarchy" style="document" />
+         <wsdl:input>
+            <soap12:body use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="GetAgentHierarchyForLicensedState">
+         <soap12:operation soapAction="http://tempuri.org/IAgentInfoService/GetAgentHierarchyForLicensedState" style="document" />
+         <wsdl:input>
+            <soap12:body use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="GetAllLinesOfBusiness">
+         <soap12:operation soapAction="http://tempuri.org/IAgentInfoService/GetAllLinesOfBusiness" style="document" />
+         <wsdl:input>
+            <soap12:body use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="GetAgentDetail">
+         <soap12:operation soapAction="http://tempuri.org/IAgentInfoService/GetAgentDetail" style="document" />
+         <wsdl:input>
+            <soap12:body use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="GetAgentDetailForList">
+         <soap12:operation soapAction="http://tempuri.org/IAgentInfoService/GetAgentDetailForList" style="document" />
+         <wsdl:input>
+            <soap12:body use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="GetAgencyList">
+         <soap12:operation soapAction="http://tempuri.org/IAgentInfoService/GetAgencyList" style="document" />
+         <wsdl:input>
+            <soap12:body use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:service name="AgentInfoService">
+      <wsdl:port name="AgentInfoServiceOverWSHttp" binding="tns:AgentInfoServiceOverWSHttp">
+         <soap12:address location="http://qa-webnbsvc102.pminsco.com/AgentInfoService/AgentInfoService.svc/WSHTTP" />
+         <wsa10:EndpointReference>
+            <wsa10:Address>http://qa-webnbsvc102.pminsco.com/AgentInfoService/AgentInfoService.svc/WSHTTP</wsa10:Address>
+            <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+               <Dns>localhost</Dns>
+            </Identity>
+         </wsa10:EndpointReference>
+      </wsdl:port>
+      <wsdl:port name="AgentInfoServiceOverTCP" binding="tns:AgentInfoServiceOverTCP">
+         <soap12:address location="net.tcp://qa-webnbsvc102.pminsco.com/AgentInfoService/AgentInfoService.svc/TCP" />
+         <wsa10:EndpointReference>
+            <wsa10:Address>net.tcp://qa-webnbsvc102.pminsco.com/AgentInfoService/AgentInfoService.svc/TCP</wsa10:Address>
+            <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+               <Dns>localhost</Dns>
+            </Identity>
+         </wsa10:EndpointReference>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>
