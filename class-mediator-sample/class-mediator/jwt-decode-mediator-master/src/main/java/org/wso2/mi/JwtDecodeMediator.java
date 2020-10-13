@@ -22,7 +22,9 @@ public class JwtDecodeMediator extends AbstractMediator {
 
     @Override
     public boolean mediate(MessageContext context) {
-        if(context.getProperty("JWT_HEADER")!=null) {
+        if(context.getProperty("JWT_HEADER") != null) {
+          
+            //Reading the property value set in the custom mediation sequence which stores the JWT header
             String temp_auth = ((String) context.getProperty("JWT_HEADER")).trim();
             String[] val= temp_auth.split("\\.");
             String auth=val[1];
@@ -33,8 +35,13 @@ public class JwtDecodeMediator extends AbstractMediator {
                 String decodedBody=new String(base64decodedBytes, "utf-8");
 
                 JsonObject jwtToken = new JsonParser().parse(decodedBody).getAsJsonObject();
+                //extracting the enduser claim from the decoded JWT token. Simillarly you can extract other JWT claim values
                 String enduser = jwtToken.get(END_USER_CLAIM).getAsString();
+
+                //Setting this extracted value as a property so that it can be accessed through the message
+                //content in the custom mediation sequence.
                 context.setProperty("apim-enduser",enduser);
+
                 log.info("Printing the enduser coming from the APIM JWT token " + enduser);
 
             } catch (UnsupportedEncodingException e) {
