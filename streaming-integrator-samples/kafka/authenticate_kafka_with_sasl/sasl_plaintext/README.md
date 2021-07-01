@@ -154,7 +154,7 @@ sh server.sh
 
 ## Testing the sample
 
-1. Create a file named HelloKafka.siddhi and paste the  content found in [this file](https://github.com/Shenavi/Blog-Samples/tree/master/streaming-integrator-samples/authenticate_kafka_with_sasl/sasl_plaintext/HelloKafka.siddhi). Here we are passing the authentication information under the "optional.configuration" attribute. This is what the optional.configuration will look like in this case
+1. Create a file named HelloKafka.siddhi and paste the  content found in [this file](https://github.com/Shenavi/Blog-Samples/tree/master/streaming-integrator-samples/kafka/authenticate_kafka_with_sasl/sasl_plaintext/HelloKafka.siddhi). Here we are passing the authentication information under the "optional.configuration" attribute. This is what the optional.configuration will look like in this case
 
 ```
 optional.configuration="""security.protocol:SASL_PLAINTEXT,sasl.kerberos.service.name:kafka,sasl.mechanism:PLAIN,sasl.jaas.config:org.apache.kafka.common.security.plain.PlainLoginModule required username="admin" password="12345";""",

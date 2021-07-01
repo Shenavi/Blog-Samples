@@ -2,15 +2,17 @@
 
 @App:description('Consume events from a Kafka Topic and log the messages on the console.')
 
+-- This is the kafka source connection to the production topic over SSL authentication
 @source(type='kafka',
-        topic.list='productions',
+        topic.list='production',
         threading.option='single.thread',
         group.id="group1",
         bootstrap.servers='localhost:9092',
-        optional.configuration="""security.protocol:SSL,ssl.truststore.location:/Users/shenavidemel/Documents/SA/Demos/FIS/SSL/keys/kafka.client.truststore.jks,ssl.truststore.password:Admin1234,ssl.keystore.location:/Users/shenavidemel/Documents/SA/Demos/FIS/SSL/keys/kafka.client.keystore.jks,ssl.keystore.password:Admin1234,ssl.key.password:Admin1234""",
+        optional.configuration="""security.protocol:SSL,ssl.truststore.location:/Users/shenavidemel/Documents/try/certs/kafka.client.truststore.jks,ssl.truststore.password:Admin1234,ssl.keystore.location:/Users/shenavidemel/Documents/try/certs/kafka.client.keystore.jks,ssl.keystore.password:Admin1234,ssl.key.password:Admin1234""",
         @map(type='json'))
 define stream SweetProductionStream (name string, amount double);
 
+-- Sink which logs the input events through the production topic to the Streaming Integrator's log file.
 @sink(type='log')
 define stream OutputStream (name string, amount double);
 
