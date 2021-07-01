@@ -1,0 +1,20 @@
+@App:name("HelloKafka_SSL")
+
+@App:description('Consume events from a Kafka Topic and log the messages on the console.')
+
+@source(type='kafka',
+        topic.list='productions',
+        threading.option='single.thread',
+        group.id="group1",
+        bootstrap.servers='localhost:9092',
+        optional.configuration="""security.protocol:SSL,ssl.truststore.location:/Users/shenavidemel/Documents/SA/Demos/FIS/SSL/keys/kafka.client.truststore.jks,ssl.truststore.password:Admin1234,ssl.keystore.location:/Users/shenavidemel/Documents/SA/Demos/FIS/SSL/keys/kafka.client.keystore.jks,ssl.keystore.password:Admin1234,ssl.key.password:Admin1234""",
+        @map(type='json'))
+define stream SweetProductionStream (name string, amount double);
+
+@sink(type='log')
+define stream OutputStream (name string, amount double);
+
+-- Query to transform the name to upper case.
+from SweetProductionStream
+select str:upper(name) as name, amount
+insert into OutputStream;

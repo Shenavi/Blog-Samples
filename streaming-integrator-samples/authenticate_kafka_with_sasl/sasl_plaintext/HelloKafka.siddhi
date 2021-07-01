@@ -1,0 +1,35 @@
+@App:name("HelloKafka")
+
+@App:description('Consume events from a Kafka Topic and log the messages on the console. Sends processed event to the bulk-orders topic')
+
+-- This is the kafka source which reads from the sales topic using SASL_PLAINTEXT authentication.
+@source(type='kafka',
+        topic.list='sales',
+        threading.option='single.thread',
+        group.id="group1",
+        bootstrap.servers='localhost:9092',
+        optional.configuration="""security.protocol:SASL_PLAINTEXT,sasl.kerberos.service.name:kafka,sasl.mechanism:PLAIN,sasl.jaas.config:org.apache.kafka.common.security.plain.PlainLoginModule required username="admin" password="12345";""",
+        @map(type='json'))
+define stream SweetProductionStream (name string, quantity int);
+
+-- This logs the events coming in from the sales topic in the Streaming Integrator log.
+@sink(type='log')
+define stream OutputStream (name string, quantity int);
+
+-- This is the kafka sink which pushes the modified events from the sales topic using SASL_PLAINTEXT authentication.
+@sink(type='kafka',
+          topic='bulk-orders',
+          bootstrap.servers='localhost:9092',
+          optional.configuration="""security.protocol:SASL_PLAINTEXT,sasl.kerberos.service.name:kafka,sasl.mechanism:PLAIN,sasl.jaas.config:org.apache.kafka.common.security.plain.PlainLoginModule required username="admin" password="12345";""",
+          @map(type='json'))
+    define stream BulkOrdersStream (name string, quantity int, timestamp string);
+
+-- Query which modifies and pushes data from the SweetProductionStream stream to the BulkOrdersStream.
+from SweetProductionStream
+select name, quantity, time:currentTimestamp() as  timestamp
+insert into BulkOrdersStream;
+
+-- Query to transform the name to upper case.
+from SweetProductionStream
+select str:upper(name) as name, quantity
+insert into OutputStream;
