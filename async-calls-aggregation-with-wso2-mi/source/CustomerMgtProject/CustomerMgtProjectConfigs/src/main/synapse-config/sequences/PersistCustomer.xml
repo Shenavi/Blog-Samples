@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="PersistCustomer" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <payloadFactory media-type="xml">
+        <format>
+            <postcustomer xmlns="">
+                <customerName>$1</customerName>
+                <firstName>$2</firstName>
+                <lastName>$3</lastName>
+                <phone>$4</phone>
+                <address>$5</address>
+                <country>$6</country>
+            </postcustomer>
+        </format>
+        <args>
+            <arg evaluator="xml" expression="get-property('customerName')"/>
+            <arg evaluator="xml" expression="get-property('firstName')"/>
+            <arg evaluator="xml" expression="get-property('lastName')"/>
+            <arg evaluator="xml" expression="get-property('phone')"/>
+            <arg evaluator="xml" expression="get-property('address')"/>
+            <arg evaluator="xml" expression="get-property('country')"/>
+        </args>
+    </payloadFactory>
+    <call>
+        <endpoint key="AddCustomerEndpoint"/>
+    </call>
+    <payloadFactory media-type="xml">
+        <format>
+            <body>
+                <completed>true</completed>
+            </body>
+        </format>
+        <args/>
+    </payloadFactory>
+</sequence>

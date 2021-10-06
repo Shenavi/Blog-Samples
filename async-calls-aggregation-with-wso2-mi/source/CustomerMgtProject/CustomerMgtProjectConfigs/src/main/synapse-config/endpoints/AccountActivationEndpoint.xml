@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoint name="AccountActivationEndpoint" xmlns="http://ws.apache.org/ns/synapse">
+    <http method="get" uri-template="https://run.mocky.io/v3/e39b3bcf-859a-4c2e-8a05-71b0fca92add">
+        <suspendOnFailure>
+            <initialDuration>-1</initialDuration>
+            <progressionFactor>1.0</progressionFactor>
+        </suspendOnFailure>
+        <markForSuspension>
+            <retriesBeforeSuspension>0</retriesBeforeSuspension>
+        </markForSuspension>
+    </http>
+</endpoint>

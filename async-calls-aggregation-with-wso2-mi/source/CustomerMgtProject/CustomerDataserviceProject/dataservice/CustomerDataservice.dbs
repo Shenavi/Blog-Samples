@@ -1,0 +1,39 @@
+<data name="CustomerDataservice" serviceNamespace="" serviceGroup="" transports="http https">
+  <description />
+  <config id="customerDatasource">
+    <property name="driverClassName">com.mysql.cj.jdbc.Driver</property>
+    <property name="url">jdbc:mysql://@dbHost:@dbPort/retail</property>
+    <property name="username">@dbUsername</property>
+    <property name="password">@dbPassword</property>
+  </config>
+    <resource method="POST" path="customer">
+    <call-query href="addCustomer">
+      <with-param name="customerName" query-param="customerName" />
+      <with-param name="firstName" query-param="firstName" />
+      <with-param name="lastName" query-param="lastName" />
+      <with-param name="phone" query-param="phone" />
+      <with-param name="address" query-param="address" />
+      <with-param name="country" query-param="country" />
+    </call-query>
+  </resource>
+  <operation name="addCustomerOp">
+    <call-query href="addCustomer">
+      <with-param name="customerName" query-param="customerName" />
+      <with-param name="firstName" query-param="firstName" />
+      <with-param name="lastName" query-param="lastName" />
+      <with-param name="phone" query-param="phone" />
+      <with-param name="address" query-param="address" />
+      <with-param name="country" query-param="country" />
+    </call-query>
+  </operation>
+  <query id="addCustomer" useConfig="customerDatasource">
+    <sql>insert into customers (customerName,firstName,lastName,phone,address,country) values (:customerName,:firstName,:lastName,:phone,:address,:country)</sql>
+    <param name="customerName" sqlType="STRING" />
+    <param name="firstName" sqlType="STRING" />
+    <param name="lastName" sqlType="STRING" />
+    <param name="phone" sqlType="STRING" />
+    <param name="address" sqlType="STRING" />
+    <param name="country" sqlType="STRING" />
+  </query>
+ 
+</data>

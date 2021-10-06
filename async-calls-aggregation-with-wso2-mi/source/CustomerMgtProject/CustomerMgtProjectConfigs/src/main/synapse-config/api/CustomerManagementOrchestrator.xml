@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/customer-mgt" name="CustomerManagementOrchestrator" xmlns="http://ws.apache.org/ns/synapse">
+    <resource inSequence="AddCustomerOrchestrator" methods="POST" uri-template="/customer">
+        <outSequence>
+            <respond/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+</api>

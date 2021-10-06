@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="AddCustomerOrchestrator" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <propertyGroup>
+        <property expression="json-eval($.customerName)" name="customerName" scope="default" type="STRING"/>
+        <property expression="json-eval($.firstName)" name="firstName" scope="default" type="STRING"/>
+        <property expression="json-eval($.lastName)" name="lastName" scope="default" type="STRING"/>
+        <property expression="json-eval($.phone)" name="phone" scope="default" type="STRING"/>
+        <property expression="json-eval($.address)" name="address" scope="default" type="STRING"/>
+        <property expression="json-eval($.country)" name="country" scope="default" type="STRING"/>
+    </propertyGroup>
+    <property name="enclosing_element" scope="default">
+        <result xmlns=""/>
+    </property>
+    <clone>
+        <target>
+            <sequence>
+                <payloadFactory media-type="json">
+                    <format>
+            {
+             "customerName": "$1",
+             "phoneNumber": "$2",
+             "address": "$3",
+             "country": "$4"
+            }
+        </format>
+                    <args>
+                        <arg evaluator="xml" expression="get-property('customerName')"/>
+                        <arg evaluator="xml" expression="get-property('phone')"/>
+                        <arg evaluator="xml" expression="get-property('address')"/>
+                        <arg evaluator="xml" expression="get-property('country')"/>
+                    </args>
+                </payloadFactory>
+                <call>
+                    <endpoint key="UsermgtEndpoint"/>
+                </call>
+                <property expression="json-eval($.customerType)" name="customerType" scope="default" type="STRING"/>
+                <property expression="json-eval($.externalCustomerId)" name="externalCustomerId" scope="default" type="STRING"/>
+            </sequence>
+        </target>
+        <target>
+            <sequence>
+                <sequence key="PersistCustomer"/>
+            </sequence>
+        </target>
+    </clone>
+    <aggregate>
+        <completeCondition>
+            <messageCount max="-1" min="-1"/>
+        </completeCondition>
+        <onComplete aggregateElementType="root" enclosingElementProperty="enclosing_element" expression="$body/*[1]">
+            <log level="custom">
+                <property expression="$ctx:externalCustomerId" name="externalCustomerId from endpoint"/>
+            </log>
+            <property expression="$ctx:customerType" name="custType" scope="default" type="STRING"/>
+            <property expression="$ctx:externalCustomerId" name="custId" scope="default" type="STRING"/>
+            <filter regex="Premium" source="get-property('custType')">
+                <then>
+                    <property name="limit" scope="default" type="STRING" value="2000"/>
+                </then>
+                <else>
+                    <property name="limit" scope="default" type="STRING" value="1000"/>
+                </else>
+            </filter>
+            <dbreport>
+                <connection>
+                    <pool>
+                        <driver>com.mysql.jdbc.Driver</driver>
+                        <url>jdbc:mysql://@dbHost:@dbPort/retail</url>
+                        <user>@dbUsername</user>
+                        <password>@dbPassword</password>
+                    </pool>
+                </connection>
+                <statement>
+                    <sql><![CDATA[insert into creditLimit (customerNumber,creditLimit) values (?,?);]]></sql>
+                    <parameter expression="get-property('custId')" type="VARCHAR"/>
+                    <parameter expression="get-property('limit')" type="VARCHAR"/>
+                </statement>
+            </dbreport>
+            <call>
+                <endpoint key="AccountActivationEndpoint"/>
+            </call>
+            <respond/>
+        </onComplete>
+    </aggregate>
+</sequence>

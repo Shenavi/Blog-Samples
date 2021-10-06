@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "6c30ec8c-5a18-4171-aeae-8ec323515aca",
+		"name": "CustomerManagement",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8290/customer-mgt/customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"customerName\": \"John\",\n\"firstName\": \"John\",\n\"lastName\": \"Doe\",\n\"phone\": \"077-11-222-444\",\n\"address\": \"No 60, Park Street\",\n\"country\": \"UK\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8290/customer-mgt/customer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8290",
+					"path": [
+						"customer-mgt",
+						"customer"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
