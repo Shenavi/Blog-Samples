@@ -33,6 +33,10 @@
                 <call>
                     <endpoint key="UsermgtEndpoint"/>
                 </call>
+                <log level="custom">
+                  <property expression="json-eval($.customerType)" name="customerType" scope="default" type="STRING"/>
+                  <property expression="json-eval($.externalCustomerId)" name="externalCustomerId" scope="default" type="STRING"/>
+                </log>
                 <property expression="json-eval($.customerType)" name="customerType" scope="default" type="STRING"/>
                 <property expression="json-eval($.externalCustomerId)" name="externalCustomerId" scope="default" type="STRING"/>
             </sequence>
@@ -48,6 +52,7 @@
             <messageCount max="-1" min="-1"/>
         </completeCondition>
         <onComplete aggregateElementType="root" enclosingElementProperty="enclosing_element" expression="$body/*[1]">
+            <log level="full/>
             <log level="custom">
                 <property expression="$ctx:externalCustomerId" name="externalCustomerId from endpoint"/>
             </log>
