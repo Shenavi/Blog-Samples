@@ -33,12 +33,6 @@
                 <call>
                     <endpoint key="UsermgtEndpoint"/>
                 </call>
-                <log level="custom">
-                  <property expression="json-eval($.customerType)" name="customerType" scope="default" type="STRING"/>
-                  <property expression="json-eval($.externalCustomerId)" name="externalCustomerId" scope="default" type="STRING"/>
-                </log>
-                <property expression="json-eval($.customerType)" name="customerType" scope="default" type="STRING"/>
-                <property expression="json-eval($.externalCustomerId)" name="externalCustomerId" scope="default" type="STRING"/>
             </sequence>
         </target>
         <target>
@@ -52,12 +46,13 @@
             <messageCount max="-1" min="-1"/>
         </completeCondition>
         <onComplete aggregateElementType="root" enclosingElementProperty="enclosing_element" expression="$body/*[1]">
-            <log level="full"/>
-            <log level="custom">
-                <property expression="$ctx:externalCustomerId" name="externalCustomerId from endpoint"/>
+            <log level="full"></log>           
+             <log level="custom">
+                <property expression="$body//result/jsonObject/externalCustomerId" name="externalCustomerId from endpoint"/>
+                <property expression="$body//result/jsonObject/customerType" name="external customer type from endpoint"/>
             </log>
-            <property expression="$ctx:customerType" name="custType" scope="default" type="STRING"/>
-            <property expression="$ctx:externalCustomerId" name="custId" scope="default" type="STRING"/>
+            <property expression="$body//result/jsonObject/customerType" name="custType" scope="default" type="STRING"/>
+            <property expression="$body//result/jsonObject/externalCustomerId" name="custId" scope="default" type="STRING"/>
             <filter regex="Premium" source="get-property('custType')">
                 <then>
                     <property name="limit" scope="default" type="STRING" value="2000"/>
