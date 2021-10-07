@@ -52,7 +52,7 @@
             <messageCount max="-1" min="-1"/>
         </completeCondition>
         <onComplete aggregateElementType="root" enclosingElementProperty="enclosing_element" expression="$body/*[1]">
-            <log level="full/>
+            <log level="full"/>
             <log level="custom">
                 <property expression="$ctx:externalCustomerId" name="externalCustomerId from endpoint"/>
             </log>
